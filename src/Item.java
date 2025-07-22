@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-class Item {
+class Item implements Serializable {
     private String name;
     private int amount;
 
@@ -21,22 +22,20 @@ class Item {
         this.amount += amount;
     }
 
-
     @Override
     public String toString() {
-        return "Название: " + name + " " + "Количетсво: " + amount;
+        return "Название: " + name + " Количество: " + amount;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Item)) return false;
-        Item item = (Item) o;
-        return name.equals(item.name);
+        if (!(o instanceof Item item)) return false;
+        return name.equalsIgnoreCase(item.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name.toLowerCase());
     }
 }
